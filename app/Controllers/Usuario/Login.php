@@ -14,7 +14,7 @@ class Login extends BaseController{
   public function validar_datos(){
     $usuario = $this->request->getPost('usuario');
     $contrasena = $this->request->getPost('contrasena');
-
+    
     $tabla_usuarios = new Tabla_usuarios;
     $usuario = $tabla_usuarios->login($usuario, hash("sha256", $contrasena));
     
@@ -32,6 +32,8 @@ class Login extends BaseController{
     }//end if usuario != null
     else{
       // mensaje("");
+      //mensaje
+      session()->setFlashdata('error_login', 'Usuario o contraseña incorrectos');
       return redirect()->to(route_to("login"));
     }//end if else usuario != null
 

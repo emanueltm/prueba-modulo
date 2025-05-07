@@ -10,6 +10,15 @@
   </head>
 
   <body>
+    <!--  DIV Mensaje de Error -->
+    <?php if ($msg = session()->getFlashdata('error_login')): ?>
+      <div id="msg-error" class="alert alert-danger shadow text-center"
+       style="position: fixed; top: 50px; left: 50%; transform: translateX(-50%);
+              z-index: 9999; width: auto; max-width: 90%;">
+        <?= esc($msg) ?>
+      </div>
+    <?php endif; ?>
+
     <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
       data-sidebar-position="fixed" data-header-position="fixed">
@@ -58,6 +67,17 @@
     </div>
     <script src="<?= base_url("plantilla/libs/jquery/dist/jquery.min.js") ?>"></script>
     <script src="<?= base_url("plantilla/libs/bootstrap/dist/js/bootstrap.bundle.min.js") ?>"></script>
-  </body>
 
+    <!--  Script Mensaje de Error -->
+    <script>
+      setTimeout(() => {
+        const msg = document.getElementById('msg-error');
+          if (msg) {
+            msg.style.transition = 'opacity 0.5s ease';
+            msg.style.opacity = '0';
+            setTimeout(() => msg.remove(), 500);
+          }
+        }, 3500); // 5 segundos
+    </script>
+  </body>
 </html>
