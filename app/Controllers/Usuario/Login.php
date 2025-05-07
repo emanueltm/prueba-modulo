@@ -14,7 +14,7 @@ class Login extends BaseController{
   public function validar_datos(){
     $usuario = $this->request->getPost('usuario');
     $contrasena = $this->request->getPost('contrasena');
-    
+
     $tabla_usuarios = new Tabla_usuarios;
     $usuario = $tabla_usuarios->login($usuario, hash("sha256", $contrasena));
     
