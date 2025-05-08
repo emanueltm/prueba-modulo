@@ -8,6 +8,9 @@ use App\Models\Tabla_roles;
 class Login extends BaseController{
     
   public function index(){
+    if (session()->has('id_usuario')) {
+      return redirect()->to('modulos');
+    }
     return $this->crear_vista("usuario/login");
   }
 

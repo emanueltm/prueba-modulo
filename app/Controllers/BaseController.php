@@ -54,5 +54,11 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = service('session');
+
+        // Proteger acceso si no hay sesión activa
+        if (!session()->has('id_usuario') && !in_array(uri_string(), ['login', 'validar_usuario'])) {
+            // Si no hay sesión y no está en login ni validación, redirige al login
+            return redirect()->to('login')->send(); // el ->send() detiene la ejecución inmediatamente
+        }
     }
 }
