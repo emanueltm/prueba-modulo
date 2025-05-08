@@ -11,6 +11,9 @@ $routes->get('login', 'Usuario\Login::index');
 $routes->post('validar_usuario', 'Usuario\Login::validar_datos');
 $routes->get('dashboard', 'Usuario\Dashboard::index');
 
+//Verificacion de permisospara Modulos
+$routes->get('modulos', 'Modulos::index');
+
 // Modulo 1: Registro de tallas, medidas y hemoglabina en Niñas, niños de escuelas
 $routes->get('registrar_alumnos', 'M1\Registrar::index');
 $routes->post('escuelas', 'M1\Registrar::obtener_escuelas');

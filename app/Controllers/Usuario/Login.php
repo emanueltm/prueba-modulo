@@ -29,9 +29,13 @@ class Login extends BaseController{
       $roles = $tabla_roles->roles_de($usuario->id_usuario);
       $session->set("rol_actual", $roles[0]);
       $session->set("roles", $roles);//quitar el rol que se pone por default en esta lista
+      
+      $usuario->modulos = '1'; //módulo 1
+      $session->set("modulos", $usuario->modulos); // ← módulos permitidos desde BD
+      echo session()->get('modulos');
 
       // mensaje();
-      return redirect()->to(route_to("dashboard"));
+      return redirect()->to(route_to("modulos"));
     }//end if usuario != null
     else{
       // mensaje("");

@@ -16,7 +16,7 @@ class Modulos extends BaseController
         $rol = session('rol_actual');
         $modulos_permitidos = [];
 
-        // Si es TI, muestra todos los módulos disponibles (por ahora solo 1)
+        // Si es TI, muestra todos los módulos disponibles
         if ($rol === 'TI') {
             $modulos_permitidos = ['1'];
         } else {
