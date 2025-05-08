@@ -13,8 +13,8 @@
     <!--  DIV Mensaje de Error -->
     <?php if ($msg = session()->getFlashdata('error_login')): ?>
       <div id="msg-error" class="alert alert-danger shadow text-center"
-       style="position: fixed; top: 50px; left: 50%; transform: translateX(-50%);
-              z-index: 9999; width: auto; max-width: 90%;">
+       style="position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
+              z-index: 9999; width: auto; max-width: 90%; cursor: default;">
         <?= esc($msg) ?>
       </div>
     <?php endif; ?>
@@ -70,14 +70,27 @@
 
     <!--  Script Mensaje de Error -->
     <script>
-      setTimeout(() => {
+        let hideTimeout;
         const msg = document.getElementById('msg-error');
-          if (msg) {
+
+      if (msg) {
+        const startTimer = () => {
+            hideTimeout = setTimeout(() => {
             msg.style.transition = 'opacity 0.5s ease';
             msg.style.opacity = '0';
             setTimeout(() => msg.remove(), 500);
-          }
-        }, 3500); // 5 segundos
+          }, 5000);
+        };
+
+        const stopTimer = () => {
+          clearTimeout(hideTimeout);
+        };
+
+        msg.addEventListener('mouseenter', stopTimer);
+        msg.addEventListener('mouseleave', startTimer);
+
+        startTimer(); // inicia temporizador por primera vez
+      }
     </script>
   </body>
 </html>

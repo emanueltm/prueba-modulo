@@ -33,7 +33,7 @@ class Login extends BaseController{
     else{
       // mensaje("");
       //mensaje
-      session()->setFlashdata('error_login', 'Usuario o contraseña incorrectos');
+      session()->setFlashdata('error_login', 'Usuario o contraseña incorrectos, vuelve a intentarlo o comunicate con el area de TI');
       return redirect()->to(route_to("login"));
     }//end if else usuario != null
 
