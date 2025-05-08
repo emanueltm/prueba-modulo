@@ -1,30 +1,102 @@
 <!doctype html>
 <html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Módulos</title>
+    <link rel="shortcut icon" type="image/png" href="/plantilla/images/logos/favicon.png" />
+    <link rel="stylesheet" href="/plantilla/css/styles.min.css" />
+    <link rel="stylesheet" href="/plantilla/libs/iziToast-master/iziToast.css" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.17.2/dist/sweetalert2.min.css" rel="stylesheet" />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Módulos disponibles</title>
-  <link rel="stylesheet" href="<?= base_url("plantilla/css/styles.min.css") ?>">
-</head>
+  <body>
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6"
+      data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
 
-<body>
-  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6"
-    data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
-    <div class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
-      <div class="text-center">
-        <h2 class="mb-4">Módulos disponibles para <?= esc(session()->get('nombre_completo')) ?> </h2>
+      <!-- Sidebar -->
+      <aside class="left-sidebar">
+        <div>
+          <div class="brand-logo d-flex align-items-center justify-content-between">
+            <a href="#" class="text-nowrap logo-img">
+              <img src="/plantilla/images/logos/dark-logo.svg" width="180" alt="" />
+            </a>
+            <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+              <i class="ti ti-x fs-8"></i>
+            </div>
+          </div>
 
-        <?php foreach ($modulos as $modulo): ?>
-          <a href="<?= base_url("modulo{$modulo}") ?>" class="btn btn-primary btn-lg d-block mx-auto mb-3" style="width: 250px;">
-            Módulo <?= $modulo ?>
-          </a>
-        <?php endforeach; ?>
+          <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+            <ul id="sidebarnav">
+              <li class="nav-small-cap"><i class="ti ti-dots nav-small-cap-icon fs-4"></i><span class="hide-menu">Inicio</span></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="/index.php"><i class="ti ti-layout-dashboard"></i><span class="hide-menu">Mis Modulos</span></a></li>
+              <li class="nav-small-cap"><i class="ti ti-dots nav-small-cap-icon fs-4"></i><span class="hide-menu">Mis Datos</span></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="#"><i class="ti ti-user-plus"></i><span class="hide-menu">Mi Perfil</span></a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="#"><i class="ti ti-article"></i><span class="hide-menu">Cerrar Sesión</span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <div class="body-wrapper">
+
+        <!-- Header -->
+        <header class="app-header">
+          <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+              <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+                <li class="nav-item dropdown">
+                  <a class="nav-link nav-icon-hover" href="#" id="drop2" data-bs-toggle="dropdown">
+                    <img src="/plantilla/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle" />
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                    <div class="message-body">
+                      <a href="#" class="dropdown-item d-flex align-items-center gap-2"><i class="ti ti-user fs-6"></i><p class="mb-0 fs-3">Mi Perfil</p></a>
+                      <a href="#" class="dropdown-item d-flex align-items-center gap-2"><i class="ti ti-mail fs-6"></i><p class="mb-0 fs-3">Mi Cuenta</p></a>
+                      <a href="#" class="dropdown-item d-flex align-items-center gap-2"><i class="ti ti-list-check fs-6"></i><p class="mb-0 fs-3">Mis Tareas</p></a>
+                      <a href="/logout" class="btn btn-outline-primary mx-3 mt-2 d-block">Cerrar sesión</a>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </header>
+
+        <!-- Contenido principal -->
+        <div class="container-fluid mt-4">
+          <h2 class="mb-4 text-center">Módulos disponibles</h2>
+          <div class="row justify-content-center">
+            <!-- Tarjeta de módulo -->
+            <div class="col-md-4 mb-4">
+              <div class="card shadow border-0 h-100">
+                <div class="card-body text-center">
+                  <img src="/plantilla/images/logos/dark-logo.svg" width="60" class="mb-3" alt="">
+                  <h5 class="card-title">Módulo 1</h5>
+                  <p class="card-text">Acceso al módulo 1 del sistema.</p>
+                  <a href="/m1" class="btn btn-primary w-100">Entrar</a>
+                </div>
+              </div>
+            </div>
+            <!-- Puedes copiar más tarjetas aquí -->
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="py-6 px-6 text-center">
+          <p class="mb-0 fs-4">Diseñado y Desarrollado con Amor por el <a href="/" class="pe-1 text-primary text-decoration-underline">Departamento de Tecnología de Información</a></p>
+        </div>
+
       </div>
     </div>
-  </div>
-            
-  <script src="<?= base_url("plantilla/libs/jquery/dist/jquery.min.js") ?>"></script>
-  <script src="<?= base_url("plantilla/libs/bootstrap/dist/js/bootstrap.bundle.min.js") ?>"></script>
-</body>
+
+    <!-- Scripts -->
+    <script src="/plantilla/libs/jquery/dist/jquery.min.js"></script>
+    <script src="/plantilla/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/plantilla/js/sidebarmenu.js"></script>
+    <script src="/plantilla/js/app.min.js"></script>
+    <script src="/plantilla/libs/iziToast-master/iziToast.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.17.2/dist/sweetalert2.all.min.js"></script>
+  </body>
 </html>
