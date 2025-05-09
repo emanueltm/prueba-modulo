@@ -46,6 +46,14 @@ class Login extends BaseController{
 
   }//end function validar_datos
 
+  public function logout(){
+    // Destruye todos los datos de la sesión activa
+    session()->destroy();
+
+    // Redirige al login
+    return redirect()->to('/login');
+  }//end function
+  
   public function crear_vista($nombre_vista, $contenido = array()){
     return view($nombre_vista, $contenido);
   }
