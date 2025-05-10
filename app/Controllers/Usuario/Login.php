@@ -25,10 +25,33 @@ class Login extends BaseController{
       $session = session();
       $session->set("id_usuario", $usuario->id_usuario);
       $session->set("nombre_completo", $usuario->nombre_completo);
+      
       $tabla_roles = new Tabla_roles();
-      $roles = $tabla_roles->roles_de($usuario->id_usuario);
-      $session->set("rol_actual", $roles[0]);
-      $session->set("roles", $roles);//quitar el rol que se pone por default en esta lista
+
+// Obtener todos los módulos con sus roles asignados al usuario
+$modulos = $tabla_roles->modulos_con_roles($usuario->id_usuario);
+
+// Organizar la información como [id_modulo => [modulo => nombre, roles => [rol1, rol2...]]]
+$estructura = [];
+
+foreach ($modulos as $fila) {
+    $id_modulo = $fila['id_modulo'];
+    if (!isset($estructura[$id_modulo])) {
+        $estructura[$id_modulo] = [
+            'modulo' => $fila['nombre_modulo'],
+            'roles' => []
+        ];
+    }
+    $estructura[$id_modulo]['roles'][] = $fila['nombre_rol'];
+}
+
+// Guardar en la sesión
+$session->set("modulos", $estructura);
+
+// Guardar el primer rol del primer módulo como "rol_actual"
+$primer_modulo = reset($estructura);
+$primer_rol = reset($primer_modulo['roles']);
+$session->set("rol_actual", $primer_rol);
       
       $usuario->modulos = '1'; //módulo 1
       $session->set("modulos", $usuario->modulos); // ← módulos permitidos desde BD
