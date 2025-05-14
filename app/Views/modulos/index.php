@@ -80,18 +80,18 @@
         <div class="container-fluid mt-4">
           <h2 class="mb-4 text-center">Módulos disponibles</h2>
           <div class="row justify-content-center">
-            <!-- Tarjeta de módulo -->
-            <div class="col-md-4 mb-4">
-              <div class="card shadow border-0 h-100">
-                <div class="card-body text-center">
-                  <img src="/plantilla/images/logos/dark-logo.svg" width="60" class="mb-3" alt="">
-                  <h5 class="card-title">Módulo 1</h5>
-                  <p class="card-text">Acceso al módulo 1 del sistema.</p>
-                  <a href="/m1" class="btn btn-primary w-100">Entrar</a>
+            <?php foreach (session('modulos') as $id => $datos): ?>
+              <div class="col-md-4 mb-4">
+                <div class="card shadow border-0 h-100">
+                  <div class="card-body text-center">
+                    <img src="/plantilla/images/logos/dark-logo.svg" width="60" class="mb-3" alt="">
+                    <h5 class="card-title"><?= esc($datos['modulo']) ?></h5>
+                    <p class="card-text">Rol: <?= implode(', ', $datos['roles']) ?></p>
+                    <a href="/m<?= $id ?>" class="btn btn-primary w-100">Entrar</a>
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- Puedes copiar más tarjetas aquí -->
+            <?php endforeach; ?>
           </div>
         </div>
 

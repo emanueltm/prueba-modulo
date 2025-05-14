@@ -23,18 +23,18 @@ class Tabla_roles extends Model{
   }//end function login
   
   // Nuevo método para obtener los módulos y roles del usuario
-  public function modulos_con_roles($id_usuario)
-  {
-      return $this->db
-          ->table('modulo_usuario_rol mur')
-          ->select('m.id_modulo, m.nombre AS nombre_modulo, r.rol AS nombre_rol')
-          ->join('modulos m', 'm.id_modulo = mur.id_modulo')
-          ->join('roles r', 'r.id_rol = mur.id_rol')
-          ->where('mur.id_usuario', $id_usuario)
-          ->where('mur.estatus', 1)
-          ->get()
-          ->getResultArray();
-  }
-
+  public function modulos_con_roles($id_usuario){
+    return $this->db->table('modulo_usuario_rol mur')
+        ->select('m.id_modulo, m.nombre AS nombre_modulo, r.rol AS nombre_rol')
+        ->join('usuarios u', 'mur.id_usuario = u.id_usuario')
+        ->join('modulos m', 'mur.id_modulo = m.id_modulo')
+        ->join('roles r', 'mur.id_rol = r.id_rol')
+        ->where('mur.id_usuario', $id_usuario)
+        ->where('mur.estatus', 1) // ← Solo relaciones activas
+        ->where('m.estatus', 1)   // ← Solo módulos activos
+        ->where('r.estatus', 1)   // ← Solo roles activos
+        ->get()
+        ->getResultArray();
+    }
 }
 //end class Tabla_usuarios
