@@ -43,3 +43,4 @@ class Login extends BaseController{
     return view($nombre_vista, $contenido);
   }
 }
+
