@@ -12,21 +12,17 @@ class Modulos extends BaseController
             return redirect()->to('/login');
         }
 
-        // Obtener datos de sesión
-        $rol = session('rol_actual');
-        $modulos_permitidos = [];
+        // Obtener estructura de módulos con roles desde la sesión
+        $estructura = session('modulos');
 
-        // Si es TI, muestra todos los módulos disponibles
-        if ($rol === 'TI') {
-            $modulos_permitidos = ['1'];
-        } else {
-            // Si no, se extraen los módulos desde la sesión (cadena tipo "1,2")
-            $modulos_permitidos = explode(',', session('modulos') ?? '');
+        // Si no hay estructura (algo falló)
+        if (!$estructura || !is_array($estructura)) {
+            return redirect()->to('/login');
         }
 
         return view('modulos/index', [
-            'modulos' => $modulos_permitidos,
-            'rol' => $rol
+            'modulos' => $estructura
         ]);
     }
 }
+
