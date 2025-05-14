@@ -22,13 +22,9 @@ class Login extends BaseController{
       $session = session();
       $session->set("id_usuario", $usuario->id_usuario);
       $session->set("nombre_completo", $usuario->nombre_completo);
-      $tabla_roles = new Tabla_roles();
-      $roles = $tabla_roles->roles_de($usuario->id_usuario);
-      $session->set("rol_actual", $roles[0]);
-      $session->set("roles", $roles);//quitar el rol que se pone por default en esta lista
 
       // mensaje();
-      return redirect()->to(route_to("dashboard"));
+      return redirect()->to(route_to("modulos"));
     }//end if usuario != null
     else{
       // mensaje("");
@@ -43,4 +39,5 @@ class Login extends BaseController{
     return view($nombre_vista, $contenido);
   }
 }
+
 
