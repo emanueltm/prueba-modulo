@@ -55,6 +55,15 @@ class Login extends BaseController{
 
   }//end function validar_datos
 
+  function esSuperAdmin($modulos, $nombreRol = 'Admin') {
+    foreach ($modulos as $modulo) {
+        if (!in_array($nombreRol, $modulo['roles'])) {
+            return false; // En al menos un módulo no tiene el rol
+        }
+    }
+    return true; // Tiene el rol SuperAdmin en todos los módulos
+  }
+
   public function logout(){
     session()->destroy(); // Cierra sesión
     return redirect()->to('/login');
